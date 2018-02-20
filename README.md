@@ -7,7 +7,19 @@ I followed the following articles to set this project up:
 * http://docs.celeryproject.org/en/latest/getting-started/brokers/sqs.html
 
 # Setup
+## Pre-requisites
+
+I assume Anaconda or Miniconda is installed. 
+
+**Unix**
+A few packages need to be installed
+
+```
+sudo apt-get install libcurl4-openssl-dev
+```
+
 ## Project creation and setup
+
 ```
 conda create -n djangocelery python=3.4
 activate djangocelery
@@ -18,7 +30,7 @@ activate djangocelery
 Install packages: 
 
 ```
-pip install django celery boto3 django-celery
+pip install django celery boto3 django-celery sqlalchemy pycurl
 ```
 
 ## AWS
@@ -47,13 +59,15 @@ In one terminal, run the django server:
 
 ```
 cd app
+activate djangocelery
 python manage.py runserver
 ```
 
 In another terminal, start the worker process:
 
 ```
-celery -A proj worker -l info
+activate djangocelery
+celery -A app worker -l info
 ```
 
 ## AWS
