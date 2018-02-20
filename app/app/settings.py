@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import local_settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -47,10 +46,9 @@ djcelery.setup_loader()
 CELERY_BROKER_URL = 'sqs://'
 CELERY_BROKER_TRANSPORT_OPTIONS = {
     'region': 'sa-east-1',
+    'queue_name_prefix': 'test-'
 }
-CELERY_BROKER_USER = 'AKIAJLSTGYBYXGZFMWAQ'
-CELERY_BROKER_PASSWORD = 'XzDI2Ui4qfGNOG7gOdaoI29gKqXDvenNW7TpmFCU'
-CELERY_TASK_DEFAULT_QUEUE = 'aukio-queue'
+#CELERY_TASK_DEFAULT_QUEUE = 'aukio-queue'
 CELERY_RESULT_BACKEND = 'db+sqlite:///results.sqlite'
 
 MIDDLEWARE = [
@@ -132,3 +130,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# OVERRIDE WITH LOCAL SETTINGS
+try:
+    from .local_settings import *
+except ImportError as e:
+    print('ImportError for local settings',e)
