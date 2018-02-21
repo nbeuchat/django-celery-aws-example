@@ -30,7 +30,7 @@ activate djangocelery
 Install packages: 
 
 ```
-pip install django celery boto3 django-celery sqlalchemy pycurl
+pip install django celery boto3 django-celery sqlalchemy pycurl anyjson
 ```
 
 ## AWS
